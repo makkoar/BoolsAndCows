@@ -13,4 +13,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="ConsoleMenu">
+      <HintPath>ConsoleMenu.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>
