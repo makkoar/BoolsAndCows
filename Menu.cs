@@ -1,4 +1,4 @@
-﻿namespace LR_T4MK
+﻿namespace BoolsAndCows
 {
     public class Menu
     {

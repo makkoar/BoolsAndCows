@@ -1,6 +1,4 @@
-﻿using LR_T4MK;
-
-namespace BoolsAndCows
+﻿namespace BoolsAndCows
 {
     public static class Data
     {
