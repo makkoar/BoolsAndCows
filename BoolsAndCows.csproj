@@ -14,4 +14,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="ConsoleMenu">
+      <HintPath>..\ConsoleMenu\bin\Release\net7.0\ConsoleMenu.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
