@@ -27,9 +27,9 @@
             {
             EnteringANumber:
                 Console.Clear();
-                Console.WriteLine(Text[12].Replace("{0}", $"{i}"));
+                Console.WriteLine(Text[6].Replace("{0}", $"{i}"));
                 SetColor(ConsoleColor.Black, ConsoleColor.DarkGray);
-                Console.Write(Text[18]);
+                Console.Write(Text[12]);
                 int.TryParse(Console.ReadLine(), out int Attempt);
                 SetColor(ConsoleColor.Black, ConsoleColor.White);
                 if (Attempt.ToString().Length != 4) goto EnteringANumber;
@@ -45,7 +45,7 @@
                         if ($"{Attempt}"[j] == PCNumber[k] && j == k) Bulls++;
                     }
                 Cows -= Bulls;
-                Console.WriteLine((i == 10) ? Text[8] : ((Bulls == 4) ? Text[7] : Text[6].Replace("{0}", $"{Bulls}").Replace("{1}", $"{Cows}")));
+                Console.WriteLine((i == 10) ? Text[2] : ((Bulls == 4) ? Text[1] : Text[0].Replace("{0}", $"{Bulls}").Replace("{1}", $"{Cows}")));
                 Console.ReadKey();
                 if (Bulls == 4) break;
             }
@@ -62,9 +62,9 @@
             {
             EnteringANumber:
                 Console.Clear();
-                Console.WriteLine(Text[14].Replace("{0}", CPlayer.ToString()).Replace("{1}", (CPlayer + ((CPlayer == 1) ? 1 : -1)).ToString()));
+                Console.WriteLine(Text[8].Replace("{0}", CPlayer.ToString()).Replace("{1}", (CPlayer + ((CPlayer == 1) ? 1 : -1)).ToString()));
                 SetColor(ConsoleColor.Black, ConsoleColor.DarkGray);
-                Console.Write(Text[18]);
+                Console.Write(Text[12]);
                 int.TryParse(Console.ReadLine(), out int _CPlayer);
                 SetColor(ConsoleColor.Black, ConsoleColor.White);
                 if (_CPlayer.ToString().Length != 4) goto EnteringANumber;
@@ -79,9 +79,9 @@
             {
             EnteringANumber:
                 Console.Clear();
-                Console.WriteLine(Text[17].Replace("{0}", isFirstPlayer ? "1" : "2"));
+                Console.WriteLine(Text[11].Replace("{0}", isFirstPlayer ? "1" : "2"));
                 SetColor(ConsoleColor.Black, ConsoleColor.DarkGray);
-                Console.Write(Text[18]);
+                Console.Write(Text[12]);
                 _ = int.TryParse(Console.ReadLine(), out int Attempt);
                 SetColor(ConsoleColor.Black, ConsoleColor.White);
                 if (Attempt.ToString().Length != 4) goto EnteringANumber;
@@ -98,7 +98,7 @@
                         if ($"{Attempt}"[j] == PlNumber[isFirstPlayer ? 1 : 0][k] && j == k) Bulls++;
                     }
                 Cows -= Bulls;
-                Console.WriteLine((Bulls == 4) ? Text[9].Replace("{0}", isFirstPlayer ? "1" : "2") : Text[6].Replace("{0}", $"{Bulls}").Replace("{1}", $"{Cows}"));
+                Console.WriteLine((Bulls == 4) ? Text[3].Replace("{0}", isFirstPlayer ? "1" : "2") : Text[0].Replace("{0}", $"{Bulls}").Replace("{1}", $"{Cows}"));
                 Console.ReadKey();
                 if (Bulls == 4) break;
 

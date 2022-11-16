@@ -13,12 +13,6 @@
 
         public static List<string> Text = new()
         {
-            null,
-            "* Готово",
-            null,
-            null,
-            null,
-            null,
             "\nБыки: {0} | Коровы: {1}",
             "\nВы победили!",
             "\nВы проиграли!",
