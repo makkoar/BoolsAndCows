@@ -108,10 +108,10 @@
             if (ReplayMenu.GetIndex() == 1) goto StartGamePl;
         }
 
-        public static string Replace(string Text, params string[] Texts)
+        public static string Replace(string Text, params object[] Texts)
         {
             string Temp = Text;
-            for (int i = 0; i < Texts.Length; i++) Temp = Temp.Replace($"{{{i}}}", Texts[i]);
+            for (int i = 0; i < Texts.Length; i++) Temp = Temp.Replace($"{{{i}}}", $"{Texts[i]}");
             return Temp;
         }
     }
