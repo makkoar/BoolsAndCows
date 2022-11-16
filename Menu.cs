@@ -1,4 +1,4 @@
-﻿namespace BoolsAndCows
+﻿namespace ConsoleMenu
 {
     public class Menu
     {
