@@ -12,7 +12,7 @@
             this.Title = Title;
         }
 
-        public byte GetIndex(params string[] Replace)
+        public byte GetIndex(params string[] Texts)
         {
             byte MenuIndex = 0;
             while (true)
@@ -20,7 +20,7 @@
                 Console.Clear();
                 SetColor(ConsoleColor.Black, ConsoleColor.White);
                 string Title = this.Title;
-                for (int i = 0; i < Replace.Length; i++) Title = Title.Replace($"{{{i}}}", Replace[i]);
+                for (int i = 0; i < Texts.Length; i++) Title = Title.Replace($"{{{i}}}", Texts[i]);
                 Console.WriteLine(Title);
                 foreach ((byte Index, string Text) Item in MenuItems)
                 {
