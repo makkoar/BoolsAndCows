@@ -37,5 +37,11 @@
                 }
             }
         }
+
+        public static void SetColor(ConsoleColor BackgroundColor, ConsoleColor TextColor)
+        {
+            Console.BackgroundColor = BackgroundColor;
+            Console.ForegroundColor = TextColor;
+        }
     }
 }

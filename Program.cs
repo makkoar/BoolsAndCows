@@ -2,9 +2,10 @@
 {
     public class Program
     {
-        public unsafe static void Main()
+        public static void Main()
         {
-            Init();
+            Console.OutputEncoding = Encoding.UTF8;
+            SetColor(ConsoleColor.Black, ConsoleColor.White);
         MainMenu:
             switch (MainMenu.GetIndex())
             {

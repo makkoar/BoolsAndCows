@@ -2,7 +2,6 @@
 {
     public static class Data
     {
-        public const byte FontSize = 20;
         public static Random random = new();
 
         public static Menu MainMenu = new("Выберите противника:", "Компьютер", "Игрок");
