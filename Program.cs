@@ -7,26 +7,14 @@
             Init();
             uint Selector = 1;
         MainMenu:
-            Selector = 1;
-            while (true)
+            switch (MainMenu.GetIndex())
             {
-                Console.Clear();
-                Console.WriteLine(Text[11]);
-                if (Selector == 1) SetColor(ConsoleColor.Green, ConsoleColor.Black);
-                Console.WriteLine(Text[3].PadRight(64));
-                if (Selector == 1) SetColor(ConsoleColor.Black, ConsoleColor.White);
-                if (Selector == 2) SetColor(ConsoleColor.Green, ConsoleColor.Black);
-                Console.WriteLine(Text[2].PadRight(64));
-                if (Selector == 2) SetColor(ConsoleColor.Black, ConsoleColor.White);
-                switch (Console.ReadKey().Key)
-                {
-                    case ConsoleKey.UpArrow: Selector = (Selector != 1) ? Selector - 1 : 2; break;
-                    case ConsoleKey.DownArrow: Selector = (Selector != 2) ? Selector + 1 : 1; break;
-                    case ConsoleKey.Escape: Process.GetCurrentProcess().Kill(); break;
-                    case ConsoleKey.Enter: goto ExitSelectMenu;
-                }
+                case 0: Selector = 1; break; /*goto StartGamePC;*/
+                case 1: Selector = 2; break; /*goto MainMenu;*/
+                default:
+                    break;
             }
-        ExitSelectMenu:
+        
             switch (Selector)
             {
                 case 1:
@@ -68,30 +56,12 @@
                         Console.ReadKey();
                         if (Bulls == 4) break;
                     }
-                    Selector = 1;
-                    while (true)
+                    switch (ReplayMenu.GetIndex())
                     {
-                        Console.Clear();
-                        Console.WriteLine(Text[10]);
-                        if (Selector == 1) SetColor(ConsoleColor.Green, ConsoleColor.Black);
-                        Console.WriteLine(Text[0].PadRight(64));
-                        if (Selector == 1) SetColor(ConsoleColor.Black, ConsoleColor.White);
-                        if (Selector == 2) SetColor(ConsoleColor.Green, ConsoleColor.Black);
-                        Console.WriteLine(Text[4].PadRight(64));
-                        if (Selector == 2) SetColor(ConsoleColor.Black, ConsoleColor.White);
-                        switch (Console.ReadKey().Key)
-                        {
-                            case ConsoleKey.UpArrow: Selector = (Selector != 1) ? Selector - 1 : 2; break;
-                            case ConsoleKey.DownArrow: Selector = (Selector != 2) ? Selector + 1 : 1; break;
-                            case ConsoleKey.Escape: Process.GetCurrentProcess().Kill(); break;
-                            case ConsoleKey.Enter: goto ExitPCSelectMenu;
-                        }
-                    }
-                ExitPCSelectMenu:
-                    switch (Selector)
-                    {
-                        case 1: goto MainMenu;
-                        case 2: goto StartGamePC;
+                        case 0: goto MainMenu;
+                        case 1:  goto StartGamePC;
+                        default:
+                            break;
                     }
                     break;
                 case 2:
@@ -149,39 +119,25 @@
                         ChangePlayer(isFirstPlayer);
                         isFirstPlayer = !isFirstPlayer;
                     }
-                    Selector = 1;
-                    while (true)
+                    switch (ReplayMenu.GetIndex())
                     {
-                        Console.Clear();
-                        Console.WriteLine(Text[10]);
-                        if (Selector == 1) SetColor(ConsoleColor.Green, ConsoleColor.Black);
-                        Console.WriteLine(Text[0].PadRight(64));
-                        if (Selector == 1) SetColor(ConsoleColor.Black, ConsoleColor.White);
-                        if (Selector == 2) SetColor(ConsoleColor.Green, ConsoleColor.Black);
-                        Console.WriteLine(Text[4].PadRight(64));
-                        if (Selector == 2) SetColor(ConsoleColor.Black, ConsoleColor.White);
-                        switch (Console.ReadKey().Key)
-                        {
-                            case ConsoleKey.UpArrow: Selector = (Selector != 1) ? Selector - 1 : 2; break;
-                            case ConsoleKey.DownArrow: Selector = (Selector != 2) ? Selector + 1 : 1; break;
-                            case ConsoleKey.Escape: Process.GetCurrentProcess().Kill(); break;
-                            case ConsoleKey.Enter: goto ExitPlSelectMenu;
-                        }
-                    }
-                ExitPlSelectMenu:
-                    switch (Selector)
-                    {
-                        case 1: goto MainMenu;
-                        case 2: goto StartGamePl;
+                        case 0: goto MainMenu;
+                        case 1: goto StartGamePl;
+                        default:
+                            break;
                     }
                     break;
             }
             goto MainMenu;
         }
 
-        public static void ChangePlayer(bool isFirstPlayer)
+        public static void PlayToPC()
         {
 
+        }
+
+        public static void ChangePlayer(bool isFirstPlayer)
+        {
             Console.Clear();
             Console.WriteLine(Text[15].Replace("{0}", isFirstPlayer ? "1" : "2").Replace("{1}", isFirstPlayer ? "2" : "1"));
             SetColor(ConsoleColor.Green, ConsoleColor.Black);
