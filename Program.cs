@@ -27,7 +27,7 @@
             {
             EnteringANumber:
                 Console.Clear();
-                Console.WriteLine(Text[6].Replace("{0}", $"{i}"));
+                Console.WriteLine(Replace(Text[6], $"{i}"));
                 SetColor(ConsoleColor.Black, ConsoleColor.DarkGray);
                 Console.Write(Text[12]);
                 int.TryParse(Console.ReadLine(), out int Attempt);
@@ -45,7 +45,7 @@
                         if ($"{Attempt}"[j] == PCNumber[k] && j == k) Bulls++;
                     }
                 Cows -= Bulls;
-                Console.WriteLine((i == 10) ? Text[2] : ((Bulls == 4) ? Text[1] : Text[0].Replace("{0}", $"{Bulls}").Replace("{1}", $"{Cows}")));
+                Console.WriteLine((i == 10) ? Text[2] : ((Bulls == 4) ? Text[1] : Replace(Text[0], $"{Bulls}", $"{Cows}")));
                 Console.ReadKey();
                 if (Bulls == 4) break;
             }
@@ -62,7 +62,7 @@
             {
             EnteringANumber:
                 Console.Clear();
-                Console.WriteLine(Text[8].Replace("{0}", CPlayer.ToString()).Replace("{1}", (CPlayer + ((CPlayer == 1) ? 1 : -1)).ToString()));
+                Console.WriteLine(Replace(Text[8], $"{CPlayer}", $"{CPlayer + (CPlayer == 1 ? 1 : -1)}"));
                 SetColor(ConsoleColor.Black, ConsoleColor.DarkGray);
                 Console.Write(Text[12]);
                 int.TryParse(Console.ReadLine(), out int _CPlayer);
@@ -79,7 +79,7 @@
             {
             EnteringANumber:
                 Console.Clear();
-                Console.WriteLine(Text[11].Replace("{0}", isFirstPlayer ? "1" : "2"));
+                Console.WriteLine(Replace(Text[11], isFirstPlayer ? "1" : "2"));
                 SetColor(ConsoleColor.Black, ConsoleColor.DarkGray);
                 Console.Write(Text[12]);
                 _ = int.TryParse(Console.ReadLine(), out int Attempt);
@@ -98,7 +98,7 @@
                         if ($"{Attempt}"[j] == PlNumber[isFirstPlayer ? 1 : 0][k] && j == k) Bulls++;
                     }
                 Cows -= Bulls;
-                Console.WriteLine((Bulls == 4) ? Text[3].Replace("{0}", isFirstPlayer ? "1" : "2") : Text[0].Replace("{0}", $"{Bulls}").Replace("{1}", $"{Cows}"));
+                Console.WriteLine((Bulls == 4) ? Replace(Text[3], isFirstPlayer ? "1" : "2") : Replace(Text[0], $"{Bulls}", $"{Cows}"));
                 Console.ReadKey();
                 if (Bulls == 4) break;
 
@@ -106,6 +106,13 @@
                 isFirstPlayer = !isFirstPlayer;
             }
             if (ReplayMenu.GetIndex() == 1) goto StartGamePl;
+        }
+
+        public static string Replace(string Text, params string[] Texts)
+        {
+            string Temp = Text;
+            for (int i = 0; i < Texts.Length; i++) Temp = Temp.Replace($"{{{i}}}", Texts[i]);
+            return Temp;
         }
     }
 }
