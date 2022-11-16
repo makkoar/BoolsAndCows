@@ -27,9 +27,9 @@
             {
             EnteringANumber:
                 Console.Clear();
-                Console.WriteLine(Replace(Text[3], $"{i}"));
+                Console.WriteLine(Replace("Компьютер загадал число, попытайтесь угадать число. Попытка {0}/10", $"{i}"));
                 SetColor(ConsoleColor.Black, ConsoleColor.DarkGray);
-                Console.Write(Text[9]);
+                Console.Write("Ваше число: ");
                 int.TryParse(Console.ReadLine(), out int Attempt);
                 SetColor(ConsoleColor.Black, ConsoleColor.White);
                 if (Attempt.ToString().Length != 4) goto EnteringANumber;
@@ -62,9 +62,9 @@
             {
             EnteringANumber:
                 Console.Clear();
-                Console.WriteLine(Replace(Text[5], $"{CPlayer}", $"{CPlayer + (CPlayer == 1 ? 1 : -1)}"));
+                Console.WriteLine(Replace("Игрок {0}, введите своё число втайне от игрока {1}:", $"{CPlayer}", $"{CPlayer + (CPlayer == 1 ? 1 : -1)}"));
                 SetColor(ConsoleColor.Black, ConsoleColor.DarkGray);
-                Console.Write(Text[9]);
+                Console.Write("Ваше число: ");
                 int.TryParse(Console.ReadLine(), out int _CPlayer);
                 SetColor(ConsoleColor.Black, ConsoleColor.White);
                 if (_CPlayer.ToString().Length != 4) goto EnteringANumber;
@@ -79,9 +79,9 @@
             {
             EnteringANumber:
                 Console.Clear();
-                Console.WriteLine(Replace(Text[8], isFirstPlayer ? "1" : "2"));
+                Console.WriteLine(Replace("Игрок {0}, попытайтесь угадать число соперника.", isFirstPlayer ? "1" : "2"));
                 SetColor(ConsoleColor.Black, ConsoleColor.DarkGray);
-                Console.Write(Text[9]);
+                Console.Write("Ваше число: ");
                 _ = int.TryParse(Console.ReadLine(), out int Attempt);
                 SetColor(ConsoleColor.Black, ConsoleColor.White);
                 if (Attempt.ToString().Length != 4) goto EnteringANumber;
@@ -98,11 +98,11 @@
                         if ($"{Attempt}"[j] == PlNumber[isFirstPlayer ? 1 : 0][k] && j == k) Bulls++;
                     }
                 Cows -= Bulls;
-                Console.WriteLine((Bulls == 4) ? Replace(Text[0], isFirstPlayer ? "1" : "2") : Replace("\nБыки: {0} | Коровы: {1}", $"{Bulls}", $"{Cows}"));
+                Console.WriteLine((Bulls == 4) ? Replace("\nИгрок {0} победил!", isFirstPlayer ? "1" : "2") : Replace("\nБыки: {0} | Коровы: {1}", $"{Bulls}", $"{Cows}"));
                 Console.ReadKey();
                 if (Bulls == 4) break;
 
-                _ = ChangePlayerMenu.GetIndex(isFirstPlayer ? "1" : "2", isFirstPlayer ? "2" : "1");
+                _ = ChangePlayerMenu.GetIndex(isFirstPlayer ? 1 : 2, isFirstPlayer ? 2 : 1);
                 isFirstPlayer = !isFirstPlayer;
             }
             if (ReplayMenu.GetIndex() == 1) goto StartGamePl;
