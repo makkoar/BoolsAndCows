@@ -21,7 +21,7 @@
             _ = PCPlayMenu.GetIndex();
         StartGamePC:
             Difficulty RDifficulty = (Difficulty)DifficultyMenu.GetIndex();
-            int NumberOfAttempts = RDifficulty switch { Difficulty.Easy => 15, Difficulty.Normal => 10, Difficulty.Hard => 7, _ => -1 };
+            sbyte NumberOfAttempts = RDifficulty switch { Difficulty.Easy => 15, Difficulty.Normal => 10, Difficulty.Hard => 7, _ => -1 };
             string PCNumber = string.Join("", Enumerable.Range(1, 9).OrderBy(x => random.Next()).Take(4));
             for (int i = 1; i <= NumberOfAttempts || NumberOfAttempts == -1; i++)
             {
