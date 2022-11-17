@@ -24,15 +24,13 @@
             {
             EnteringANumber:
                 Console.Clear();
+                SetColor(ConsoleColor.Black, ConsoleColor.White);
                 Console.WriteLine(Replace("Компьютер загадал число, попытайтесь угадать число. Попытка {0}/10", i));
                 SetColor(ConsoleColor.Black, ConsoleColor.DarkGray);
                 Console.Write("Ваше число: ");
-                int.TryParse(Console.ReadLine(), out int Attempt);
+                if (!int.TryParse(Console.ReadLine(), out int Attempt) || $"{Attempt}".Length != 4) goto EnteringANumber;
                 SetColor(ConsoleColor.Black, ConsoleColor.White);
-                if (Attempt.ToString().Length != 4) goto EnteringANumber;
-                for (int _i = 0; _i < Attempt.ToString().Length; _i++)
-                    for (int __i = 0; __i < Attempt.ToString().Length; __i++)
-                        if (_i != __i && Attempt.ToString()[_i] == Attempt.ToString()[__i]) goto EnteringANumber;
+                if (4 != $"{Attempt}".Distinct().Count()) goto EnteringANumber;
                 int Cows = 0;
                 int Bulls = 0;
                 for (int j = 0; j < 4; j++)
