@@ -15,15 +15,11 @@
             goto MainMenu;
         }
 
-        public unsafe static void PlayToPC()
+        public static void PlayToPC()
         {
             _ = PCPlayMenu.GetIndex();
         StartGamePC:
-            string PCNumber = "----";
-            List<int> rndNum = Enumerable.Range(1, 9).OrderBy(x => random.Next()).Take(4).ToList();
-            for (int i = 0; i < 4; i++)
-                fixed (char* ptr = PCNumber)
-                    ptr[i] = Convert.ToChar(rndNum[i].ToString());
+            string PCNumber = string.Join("", Enumerable.Range(1, 9).OrderBy(x => random.Next()).Take(4));
             for (int i = 1; i <= 10; i++)
             {
             EnteringANumber:
