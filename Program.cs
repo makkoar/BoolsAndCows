@@ -28,9 +28,8 @@
                 Console.WriteLine(Replace("Компьютер загадал число, попытайтесь угадать число. Попытка {0}/10", i));
                 SetColor(ConsoleColor.Black, ConsoleColor.DarkGray);
                 Console.Write("Ваше число: ");
-                if (!int.TryParse(Console.ReadLine(), out int Attempt) || $"{Attempt}".Length != 4) goto EnteringANumber;
+                if ((!int.TryParse(Console.ReadLine(), out int Attempt) || $"{Attempt}".Length != 4) || $"{Attempt}".Distinct().Count() != 4) goto EnteringANumber;
                 SetColor(ConsoleColor.Black, ConsoleColor.White);
-                if (4 != $"{Attempt}".Distinct().Count()) goto EnteringANumber;
                 int Cows = 0;
                 int Bulls = 0;
                 for (int j = 0; j < 4; j++)
