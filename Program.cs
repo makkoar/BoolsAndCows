@@ -5,6 +5,7 @@
         public static void Main()
         {
             Console.OutputEncoding = Encoding.UTF8;
+            Console.CursorVisible = false;
             SetColor(ConsoleColor.Black, ConsoleColor.White);
         MainMenu:
             switch (MainMenu.GetIndex())
@@ -19,13 +20,15 @@
         {
             _ = PCPlayMenu.GetIndex();
         StartGamePC:
+            Difficulty RDifficulty = (Difficulty)DifficultyMenu.GetIndex();
+            int NumberOfAttempts = RDifficulty switch { Difficulty.Easy => 15, Difficulty.Normal => 10, Difficulty.Hard => 7, _ => -1 };
             string PCNumber = string.Join("", Enumerable.Range(1, 9).OrderBy(x => random.Next()).Take(4));
-            for (int i = 1; i <= 10; i++)
+            for (int i = 1; i <= NumberOfAttempts || NumberOfAttempts == -1; i++)
             {
             EnteringANumber:
                 Console.Clear();
                 SetColor(ConsoleColor.Black, ConsoleColor.White);
-                Console.WriteLine(Replace("Компьютер загадал число, попытайтесь угадать число. Попытка {0}/10 | {1}", i, PCNumber));
+                Console.WriteLine(Replace("Компьютер загадал число, попытайтесь угадать число. Попытка {0}/{1}", i, NumberOfAttempts != -1 ? NumberOfAttempts : "∞"));
                 SetColor(ConsoleColor.Black, ConsoleColor.DarkGray);
                 Console.Write("Ваше число: ");
                 if ((!int.TryParse(Console.ReadLine(), out int Attempt) || $"{Attempt}".Length != 4) || $"{Attempt}".Distinct().Count() != 4) goto EnteringANumber;
@@ -37,9 +40,10 @@
                         if (A == B)
                             if ($"{Attempt}".IndexOf(A) == PCNumber.IndexOf(A)) Bulls++;
                             else Cows++;
-                Console.WriteLine((i == 10) ? "\nВы проиграли!" : ((Bulls == 4) ? "\nВы победили!" : Replace("\nБыки: {0} | Коровы: {1}", Bulls, Cows)));
-                Console.ReadKey();
-                if (Bulls == 4) break;
+                if (Bulls == 4) { Console.Write("\nВы победили!"); Console.ReadKey(); break; }
+                else if (i == NumberOfAttempts) { Console.Write(Replace("\nВы проиграли! Число компьютера было {0}", PCNumber)); Console.ReadKey(); break; };
+                Console.Write(Replace("\nКоровы: {0} | Быки: {1}", Cows, Bulls));
+                if (Console.ReadKey().Key == ConsoleKey.Escape) return;
             }
             if (ReplayMenu.GetIndex() == 1) goto StartGamePC;
         }
