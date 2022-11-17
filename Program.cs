@@ -25,20 +25,18 @@
             EnteringANumber:
                 Console.Clear();
                 SetColor(ConsoleColor.Black, ConsoleColor.White);
-                Console.WriteLine(Replace("Компьютер загадал число, попытайтесь угадать число. Попытка {0}/10", i));
+                Console.WriteLine(Replace("Компьютер загадал число, попытайтесь угадать число. Попытка {0}/10 | {1}", i, PCNumber));
                 SetColor(ConsoleColor.Black, ConsoleColor.DarkGray);
                 Console.Write("Ваше число: ");
                 if ((!int.TryParse(Console.ReadLine(), out int Attempt) || $"{Attempt}".Length != 4) || $"{Attempt}".Distinct().Count() != 4) goto EnteringANumber;
                 SetColor(ConsoleColor.Black, ConsoleColor.White);
                 int Cows = 0;
                 int Bulls = 0;
-                for (int j = 0; j < 4; j++)
-                    for (int k = 0; k < 4; k++)
-                    {
-                        if ($"{Attempt}"[j] == PCNumber[k]) Cows++;
-                        if ($"{Attempt}"[j] == PCNumber[k] && j == k) Bulls++;
-                    }
-                Cows -= Bulls;
+                foreach (char A in $"{Attempt}")
+                    foreach (char B in PCNumber)
+                        if (A == B)
+                            if ($"{Attempt}".IndexOf(A) == PCNumber.IndexOf(A)) Bulls++;
+                            else Cows++;
                 Console.WriteLine((i == 10) ? "\nВы проиграли!" : ((Bulls == 4) ? "\nВы победили!" : Replace("\nБыки: {0} | Коровы: {1}", Bulls, Cows)));
                 Console.ReadKey();
                 if (Bulls == 4) break;
