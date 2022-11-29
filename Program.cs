@@ -6,7 +6,7 @@
         {
             Console.OutputEncoding = Encoding.UTF8;
             Console.CursorVisible = false;
-            SetColor(ConsoleColor.Black, ConsoleColor.White);
+            ConsoleMenu.Data.BlackTheme.Apply();
         MainMenu:
             switch (MainMenu.GetIndex())
             {
@@ -27,12 +27,12 @@
             {
             EnteringANumber:
                 Console.Clear();
-                SetColor(ConsoleColor.Black, ConsoleColor.White);
+                ConsoleMenu.Data.BlackTheme.Apply();
                 Console.WriteLine(Replace("Компьютер загадал число, попытайтесь угадать число. Попытка {0}/{1}", i, NumberOfAttempts != -1 ? NumberOfAttempts : "∞"));
-                SetColor(ConsoleColor.Black, ConsoleColor.DarkGray);
+                BlackGrayTheme.Apply();
                 Console.Write("Ваше число: ");
                 if (!int.TryParse(Console.ReadLine(), out int Attempt) || $"{Attempt}".Length != 4 || $"{Attempt}".Distinct().Count() != 4) goto EnteringANumber;
-                SetColor(ConsoleColor.Black, ConsoleColor.White);
+                ConsoleMenu.Data.BlackTheme.Apply();
                 int Cows = 0;
                 int Bulls = 0;
                 foreach (char A in $"{Attempt}")
@@ -59,12 +59,12 @@
             {
             EnteringANumber:
                 Console.Clear();
-                SetColor(ConsoleColor.Black, ConsoleColor.White);
+                ConsoleMenu.Data.BlackTheme.Apply();
                 Console.WriteLine(Replace("Игрок {0}, введите своё число втайне от игрока {1}:", isFirstPlayer ? 1 : 2, isFirstPlayer ? 2 : 1));
-                SetColor(ConsoleColor.Black, ConsoleColor.DarkGray);
+                BlackGrayTheme.Apply();
                 Console.Write("Ваше число: ");
                 if (!int.TryParse(Console.ReadLine(), out int CPlayer) || $"{CPlayer}".Length != 4 || $"{CPlayer}".Distinct().Count() != 4) goto EnteringANumber;
-                SetColor(ConsoleColor.Black, ConsoleColor.White);
+                ConsoleMenu.Data.BlackTheme.Apply();
                 PlNumber.Add($"{CPlayer}");
                 _ = ChangePlayerMenu.GetIndex(isFirstPlayer ? 1 : 2, isFirstPlayer ? 2 : 1);
                 isFirstPlayer = !isFirstPlayer;
@@ -74,10 +74,10 @@
             EnteringANumber:
                 Console.Clear();
                 Console.WriteLine(Replace("Игрок {0}, попытайтесь угадать число соперника.", isFirstPlayer ? 1 : 2));
-                SetColor(ConsoleColor.Black, ConsoleColor.DarkGray);
+                BlackGrayTheme.Apply();
                 Console.Write("Ваше число: ");
                 if (!int.TryParse(Console.ReadLine(), out int Attempt) || $"{Attempt}".Length != 4 || $"{Attempt}".Distinct().Count() != 4) goto EnteringANumber;
-                SetColor(ConsoleColor.Black, ConsoleColor.White);
+                ConsoleMenu.Data.BlackTheme.Apply();
                 int Cows = 0;
                 int Bulls = 0;
                 foreach (char A in $"{Attempt}")
