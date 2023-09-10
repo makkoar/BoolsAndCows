@@ -2,22 +2,27 @@
 
 public class Program
 {
+    public static Menu MainMenu = new("Выберите противника:", new MenuItem("Компьютер", PlayToPC()), new("Игрок", PlayToPl()));
+    public static Menu ReplayMenu = new("Выберите действие:", "Главное меню", "Начать заново");
+    public static Menu PCPlayMenu = new("Вы выбрали режим боя с Компьютером.\n\nКраткие правила:\nКомпьютер загадывает 4-ех значное число, цифры в нем не повторяются. Игроку даётся ∞/15/10/7 попыток в зависимости от выбраной сложности, чотбы угадать число Компьютера, где попытка — это 4-значное число с неповторяющимися цифрами, сообщаемое компьютеру.\nКомпьютер сообщает в ответ, сколько цифр угадано без совпадения с их позициями в тайном числе (то есть количество коров) и сколько угадано вплоть до позиции в тайном числе (то есть количество быков), например:\n* Задумано тайное число «3219».\n* Попытка: «2310».\n* Результат: две «коровы» (две цифры: «2» и «3» — угаданы на неверных позициях) и один «бык» (одна цифра «1» угадана вплоть до позиции).\nИгрок побеждает, если угадает число компьютера за 10 ходов.", "Начать игру");
+    public static Menu PlPlayMenu = new("Вы выбрали режим боя с Игроком.\n\nКраткие правила:\nИгрок загадывает 4-ех значное число в закрытую от соперника, цифры в нем не должны повторяться, затем соперник делает тоже самое. Игроки пытаются отгадать число друг друга до тех пор, пока один из игроков не отгадает число соперника, где попытка — это 4-значное число с неповторяющимися цифрами, сообщаемое компьютеру.\nКомпьютер сообщает в ответ, сколько цифр угадано без совпадения с их позициями в тайном числе (то есть количество коров) и сколько угадано вплоть до позиции в тайном числе (то есть количество быков), например:\n* Задумано тайное число «3219».\n* Попытка: «2310».\n* Результат: две «коровы» (две цифры: «2» и «3» — угаданы на неверных позициях) и один «бык» (одна цифра «1» угадана вплоть до позиции).\nИгрок побеждает, если угадает число соперника раньше него.", "Начать игру");
+    public static Menu ChangePlayerMenu = new("Игрок {0}, передайте управление игроку {1}.", "Готово");
+    public static Menu DifficultyMenu = new("Выберите уровень сложности:", "Без ограничений", "Лёгкий", "Нормальный", "Сложный");
+
     public static void Main()
     {
         Console.OutputEncoding = Encoding.UTF8;
         Console.CursorVisible = false;
-        ConsoleMenu.Data.BlackTheme.Apply();
+        
+        
     MainMenu:
-        switch (MainMenu.GetIndex())
-        {
-            case 0: PlayToPC(); break;
-            case 1: PlayToPl(); break;
-        }
+        MainMenu.Apply();
         goto MainMenu;
     }
 
-    public static void PlayToPC()
+    public static Action PlayToPC() => () =>
     {
+
         _ = PCPlayMenu.GetIndex();
     StartGamePC:
         Difficulty RDifficulty = (Difficulty)DifficultyMenu.GetIndex();
@@ -27,12 +32,12 @@ public class Program
         {
         EnteringANumber:
             Console.Clear();
-            ConsoleMenu.Data.BlackTheme.Apply();
+            Themes.Templates.Black.Apply();
             Console.WriteLine(Replace("Компьютер загадал число, попытайтесь угадать число. Попытка {0}/{1}", i, NumberOfAttempts != -1 ? NumberOfAttempts : "∞"));
             BlackGrayTheme.Apply();
             Console.Write("Ваше число: ");
             if (!int.TryParse(Console.ReadLine(), out int Attempt) || $"{Attempt}".Length != 4 || $"{Attempt}".Distinct().Count() != 4) goto EnteringANumber;
-            ConsoleMenu.Data.BlackTheme.Apply();
+            Themes.Templates.Black.Apply();
             int Cows = 0;
             int Bulls = 0;
             foreach (char A in $"{Attempt}")
@@ -46,9 +51,9 @@ public class Program
             if (Console.ReadKey().Key == ConsoleKey.Escape) return;
         }
         if (ReplayMenu.GetIndex() == 1) goto StartGamePC;
-    }
+    };
 
-    public static void PlayToPl()
+    public static Action PlayToPl() => () =>
     {
         _ = PlPlayMenu.GetIndex();
     StartGamePl:
@@ -59,25 +64,26 @@ public class Program
         {
         EnteringANumber:
             Console.Clear();
-            ConsoleMenu.Data.BlackTheme.Apply();
+            Themes.Templates.Black.Apply();
             Console.WriteLine(Replace("Игрок {0}, введите своё число втайне от игрока {1}:", isFirstPlayer ? 1 : 2, isFirstPlayer ? 2 : 1));
             BlackGrayTheme.Apply();
             Console.Write("Ваше число: ");
             if (!int.TryParse(Console.ReadLine(), out int CPlayer) || $"{CPlayer}".Length != 4 || $"{CPlayer}".Distinct().Count() != 4) goto EnteringANumber;
-            ConsoleMenu.Data.BlackTheme.Apply();
+            Themes.Templates.Black.Apply();
             PlNumber.Add($"{CPlayer}");
-            _ = ChangePlayerMenu.GetIndex(isFirstPlayer ? 1 : 2, isFirstPlayer ? 2 : 1);
+            _ = ChangePlayerMenu.SetTitle($"Игрок {(isFirstPlayer ? 1 : 2)}, передайте управление игроку {(isFirstPlayer ? 2 : 1)}.").GetIndex();
             isFirstPlayer = !isFirstPlayer;
         }
         while (true)
         {
         EnteringANumber:
             Console.Clear();
+            Themes.Templates.Black.Apply();
             Console.WriteLine(Replace("Игрок {0}, попытайтесь угадать число соперника.", isFirstPlayer ? 1 : 2));
             BlackGrayTheme.Apply();
             Console.Write("Ваше число: ");
             if (!int.TryParse(Console.ReadLine(), out int Attempt) || $"{Attempt}".Length != 4 || $"{Attempt}".Distinct().Count() != 4) goto EnteringANumber;
-            ConsoleMenu.Data.BlackTheme.Apply();
+            Themes.Templates.Black.Apply();
             int Cows = 0;
             int Bulls = 0;
             foreach (char A in $"{Attempt}")
@@ -88,13 +94,13 @@ public class Program
             if (Bulls == 4) { Console.Write(Replace("\nИгрок {0} победил!", isFirstPlayer ? 1 : 2)); Console.ReadKey(); break; }
             else Console.Write(Replace("\nБыки: {0} | Коровы: {1}", Bulls, Cows));
             if (Console.ReadKey().Key == ConsoleKey.Escape) return;
-            _ = ChangePlayerMenu.GetIndex(isFirstPlayer ? 1 : 2, isFirstPlayer ? 2 : 1);
+            _ = ChangePlayerMenu.SetTitle($"Игрок {(isFirstPlayer ? 1 : 2)}, передайте управление игроку {(isFirstPlayer ? 2 : 1)}.").GetIndex();
             isFirstPlayer = !isFirstPlayer;
         }
         if (ReplayMenu.GetIndex() == 1) goto StartGamePl;
-    }
+    };
 
-    public static string Replace(string Text, params object[] Texts)
+        public static string Replace(string Text, params object[] Texts)
     {
         string Temp = Text;
         for (int i = 0; i < Texts.Length; i++) Temp = Temp.Replace($"{{{i}}}", $"{Texts[i]}");
