@@ -5,6 +5,5 @@ public static class Data
 {
     public static Random random = new();
 
-    
     public static Theme BlackGrayTheme = new(ConsoleColor.Black, ConsoleColor.DarkGray);
 }

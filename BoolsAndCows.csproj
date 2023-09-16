@@ -14,6 +14,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SkyRez.ConsoleMenu" Version="3.9.10.3" />
+    <PackageReference Include="SkyRez.ConsoleMenu" Version="3.9.16.19" />
   </ItemGroup>
 </Project>
